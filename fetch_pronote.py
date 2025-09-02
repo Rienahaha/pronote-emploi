@@ -45,8 +45,8 @@ def main():
                 print(f"Erreur récupération cours pour {d.isoformat()} :", e)
                 timetable = []
             for lesson in timetable:
-                start = lesson.start.strftime("%H:%M") if getattr(lesson, "start", None) else ""
-                end   = lesson.end.strftime("%H:%M")   if getattr(lesson, "end", None) else ""
+                start = lesson.start.strftime("%H:%M") if getattr(lesson, "start", None) and not isinstance(lesson.start, str) else ""
+                end   = lesson.end.strftime("%H:%M")   if getattr(lesson, "end", None) and not isinstance(lesson.end, str) else ""
                 subject = lesson.subject if isinstance(lesson.subject, str) else lesson.subject.name if getattr(lesson, "subject", None) else ""
                 room = lesson.classroom if isinstance(lesson.classroom, str) else lesson.classroom.name if getattr(lesson, "classroom", None) else ""
                 teacher = lesson.teacher if isinstance(lesson.teacher, str) else lesson.teacher.name if getattr(lesson, "teacher", None) else ""
