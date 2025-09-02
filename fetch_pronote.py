@@ -1,3 +1,4 @@
+# fetch_pronote.py
 import os
 import sys
 import csv
@@ -9,6 +10,7 @@ except Exception as e:
     print("Erreur import pronotepy:", e)
     sys.exit(1)
 
+# Variables d'environnement (configurées dans GitHub Secrets)
 PRONOTE_URL = os.getenv("PRONOTE_URL")
 PRONOTE_USERNAME = os.getenv("PRONOTE_USERNAME")
 PRONOTE_PASSWORD = os.getenv("PRONOTE_PASSWORD")
@@ -16,6 +18,14 @@ PRONOTE_PASSWORD = os.getenv("PRONOTE_PASSWORD")
 if not (PRONOTE_URL and PRONOTE_USERNAME and PRONOTE_PASSWORD):
     print("Il manque une variable d'environnement (PRONOTE_URL / PRONOTE_USERNAME / PRONOTE_PASSWORD).")
     sys.exit(1)
+
+def get_name_from_object(obj):
+    """Fonction utilitaire pour récupérer le nom d'un objet ou la chaîne de caractères si c'en est une."""
+    if isinstance(obj, str):
+        return obj
+    elif getattr(obj, "name", None):
+        return obj.name
+    return ""
 
 def main():
     try:
@@ -44,18 +54,13 @@ def main():
                 timetable = []
             
             for lesson in timetable:
-                # Vérifie si la leçon a des attributs start, end, etc. et gère les cas où ils sont des chaînes de caractères
+                # Utilisation de la fonction utilitaire pour sécuriser la récupération des données
                 start = lesson.start.strftime("%H:%M") if getattr(lesson, "start", None) and not isinstance(lesson.start, str) else ""
-                end   = lesson.end.strftime("%H:%M")   if getattr(lesson, "end", None) and not isinstance(lesson.end, str) else ""
+                end = lesson.end.strftime("%H:%M") if getattr(lesson, "end", None) and not isinstance(lesson.end, str) else ""
                 
-                subject_obj = getattr(lesson, "subject", None)
-                subject = subject_obj.name if subject_obj and not isinstance(subject_obj, str) else subject_obj if isinstance(subject_obj, str) else ""
-
-                room_obj = getattr(lesson, "classroom", None)
-                room = room_obj if isinstance(room_obj, str) else room_obj.name if room_obj else ""
-                
-                teacher_obj = getattr(lesson, "teacher", None)
-                teacher = teacher_obj.name if teacher_obj and not isinstance(teacher_obj, str) else teacher_obj if isinstance(teacher_obj, str) else ""
+                subject = get_name_from_object(getattr(lesson, "subject", None))
+                room = get_name_from_object(getattr(lesson, "classroom", None))
+                teacher = get_name_from_object(getattr(lesson, "teacher", None))
 
                 writer.writerow([d.isoformat(), start, end, subject, room, teacher])
 
