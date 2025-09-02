@@ -16,16 +16,16 @@ PRONOTE_PASSWORD = os.getenv("PRONOTE_PASSWORD")
 if not (PRONOTE_URL and PRONOTE_USERNAME and PRONOTE_PASSWORD):
     print("Il manque une variable d'environnement (PRONOTE_URL / PRONOTE_USERNAME / PRONOTE_PASSWORD).")
     sys.exit(1)
-
 def main():
     try:
         # Tente de se connecter avec l'ENT
-       client = pronotepy.Client(PRONOTE_URL, username=PRONOTE_USERNAME, password=PRONOTE_PASSWORD, ent="educonnect")
+        client = pronotepy.Client(PRONOTE_URL, username=PRONOTE_USERNAME, password=PRONOTE_PASSWORD, ent="educonnect")
     except Exception as e:
         print("Erreur connexion Pronote:", e)
         sys.exit(1)
 
-    if not client.logged_in:
+
+if not client.logged_in:
         print("❌ Échec connexion Pronote — vérifiez URL/identifiants ou que Pronote n'utilise pas une connexion CAS spécifique.")
         sys.exit(1)
     
