@@ -40,7 +40,7 @@ def main():
         for day_offset in range(7):  # récupère la semaine à venir
             d = today + timedelta(days=day_offset)
             try:
-                timetable = client.lessons(d)
+                timetable = client.lessons.lessons(d)
             except Exception as e:
                 print(f"Erreur récupération cours pour {d.isoformat()} :", e)
                 timetable = []
