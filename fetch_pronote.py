@@ -24,7 +24,7 @@ def main():
         print("Erreur connexion Pronote:", e)
         sys.exit(1)
 
- if not client.logged_in:
+    if not client.logged_in:
         print("❌ Échec connexion Pronote — vérifiez URL/identifiants ou que Pronote n'utilise pas une connexion CAS spécifique.")
         sys.exit(1)
     
