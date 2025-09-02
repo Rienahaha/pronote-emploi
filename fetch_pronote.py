@@ -20,7 +20,7 @@ if not (PRONOTE_URL and PRONOTE_USERNAME and PRONOTE_PASSWORD):
 def main():
     try:
         # Tente de se connecter avec l'ENT
-        client = pronotepy.Client(PRONOTE_URL, username=PRONOTE_USERNAME, password=PRONOTE_PASSWORD, ent="educonnect")
+       client = pronotepy.Client(PRONOTE_URL, username=PRONOTE_USERNAME, password=PRONOTE_PASSWORD)
     except Exception as e:
         print("Erreur connexion Pronote:", e)
         sys.exit(1)
