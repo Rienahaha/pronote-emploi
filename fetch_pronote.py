@@ -47,7 +47,7 @@ def main():
             for lesson in timetable:
                 start = lesson.start.strftime("%H:%M") if getattr(lesson, "start", None) else ""
                 end   = lesson.end.strftime("%H:%M")   if getattr(lesson, "end", None) else ""
-                subject subject = lesson.subject if isinstance(lesson.subject, str) else lesson.subject.name if getattr(lesson, "subject", None) else ""
+                subject = lesson.subject if isinstance(lesson.subject, str) else lesson.subject.name if getattr(lesson, "subject", None) else ""
                 room = lesson.classroom if getattr(lesson, "classroom", None) else ""
                 teacher = lesson.teacher.name if getattr(lesson, "teacher", None) else ""
                 writer.writerow([d.isoformat(), start, end, subject, room, teacher])
