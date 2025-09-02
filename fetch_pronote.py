@@ -29,6 +29,7 @@ if not client.logged_in:
         print("❌ Échec connexion Pronote — vérifiez URL/identifiants ou que Pronote n'utilise pas une connexion CAS spécifique.")
         sys.exit(1)
     
+    # Cette ligne doit être au même niveau d'indentation que le bloc `if`
     print("✅ Connexion réussie à Pronote.")
 
 if __name__ == "__main__":
