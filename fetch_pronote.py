@@ -49,7 +49,7 @@ def main():
                 end   = lesson.end.strftime("%H:%M")   if getattr(lesson, "end", None) else ""
                 subject = lesson.subject if isinstance(lesson.subject, str) else lesson.subject.name if getattr(lesson, "subject", None) else ""
                 room = lesson.classroom if getattr(lesson, "classroom", None) else ""
-                teacher = lesson.teacher.name if getattr(lesson, "teacher", None) else ""
+                teacher = lesson.teacher if isinstance(lesson.teacher, str) else lesson.teacher.name if getattr(lesson, "teacher", None) else ""
                 writer.writerow([d.isoformat(), start, end, subject, room, teacher])
 
     print("✅ emploi.csv généré.")
