@@ -31,5 +31,5 @@ def main():
     # Cette ligne doit être au même niveau d'indentation que le bloc `if`
     print("✅ Connexion réussie à Pronote.")
 
- if __name__ == "__main__":
+if __name__ == "__main__":
     main()
