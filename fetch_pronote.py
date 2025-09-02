@@ -23,7 +23,7 @@ if not (PRONOTE_URL and PRONOTE_USERNAME and PRONOTE_PASSWORD):
 def main():
     try:
         client = pronotepy.Client(PRONOTE_URL, username=PRONOTE_USERNAME, password=PRONOTE_PASSWORD)
-   except Exception as e:
+    except Exception as e:
         print("Erreur connexion Pronote:", e)
         sys.exit(1)
 
@@ -56,4 +56,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-      
